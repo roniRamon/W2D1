@@ -37,12 +37,23 @@ def feed_me_a_fruit
   end
 end
 
+class CoffeeError < StandardError
+end
+
+class NotCoffeeError < StandardError
+end
+
+
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
+    raise LogicError.new("Your bestie must have a name!!") if name.empty?
     @name = name
+    raise LogicError.new("You don't know each other!") if yrs_known < 5
     @yrs_known = yrs_known
+    raise LogicError.new("You must have a hobby!") if fav_pastime.empty?
     @fav_pastime = fav_pastime
+
   end
 
   def talk_about_friendship
@@ -58,8 +69,6 @@ class BestFriend
   end
 end
 
-class CoffeeError < StandardError
-end
+class LogicError < RuntimeError
 
-class NotCoffeeError < StandardError
 end
